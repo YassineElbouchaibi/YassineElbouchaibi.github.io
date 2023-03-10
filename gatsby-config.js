@@ -1,16 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Blog Starter`,
+    title: `Yassine's Dev Blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Yassine El Bouchaibi`,
+      summary: `A software developer with expertise in Python, JavaScript/TypeScript, and C/C++. With experience in leading technical teams and delivering robust solutions, I have a proven track record of designing, developing, and maintaining software applications. I'm passionate about learning and constantly challenging myself to build cutting-edge systems.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
-      twitter: `kylemathews`,
-      linkedin: `kylemathews`,
-      github: `KyleAMathews`,
+      linkedin: `yassine-el-bouchaibi`,
+      github: `YassineElbouchaibi`,
     },
   },
   plugins: [
@@ -118,8 +117,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `A blog by Sridatta`,
-        short_name: `GatsbyJS`,
+        name: `A dev blog by Yassine El Bouchaibi`,
+        short_name: `Yassine's Dev Blog`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
