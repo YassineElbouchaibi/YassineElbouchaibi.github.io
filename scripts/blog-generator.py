@@ -69,8 +69,9 @@ os.system(f"git checkout -b content/{artcile_slug}")
 print(f"git add {os.getenv('OUT_PATH')}/{artcile_slug}")
 os.system(f"git add {os.getenv('OUT_PATH')}/{artcile_slug}")
 
-print(f"git commit -m 'Add new blog article: {article_title}'")
-os.system(f"git commit -m 'Add new blog article: {article_title}'")
+safe_article_title = article_title.replace("'", "\\'")
+print(f"git commit -m 'Add new blog article: {safe_article_title}'")
+os.system(f"git commit -m 'Add new blog article: {safe_article_title}'")
 
 print(f"git push origin content/{artcile_slug}")
 os.system(f"git push origin content/{artcile_slug}")
