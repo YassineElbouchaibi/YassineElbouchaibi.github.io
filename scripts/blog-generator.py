@@ -1,3 +1,4 @@
+import datetime
 import os
 from ghapi.all import GhApi
 import openai
@@ -55,6 +56,13 @@ print("Article generated! Writing to file...")
 article_content = completion.choices[0].message.content
 article_title = article_content.split("title:")[1].split("\n")[0].strip()
 artcile_slug = article_content.split("slug:")[1].split("\n")[0].strip()
+
+# Replace date in article content
+article_content = article_content.replace(
+    article_content.split("date:")[1].split("\n")[0].strip(),
+    # Set the date to the current date
+    f"\"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]}Z\""
+)
 
 # Write the article to a file
 os.makedirs(f"{os.getenv('OUT_PATH')}/{artcile_slug}", exist_ok=True)
