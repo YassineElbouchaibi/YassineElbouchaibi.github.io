@@ -21,7 +21,3 @@ jobs:
           git config --local user.email action@github.com
           OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} ./scripts/blog-generator.sh
         shell: bash
-        with:
-
-
-      
