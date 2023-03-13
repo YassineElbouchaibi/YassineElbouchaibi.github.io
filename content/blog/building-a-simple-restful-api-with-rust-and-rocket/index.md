@@ -1,7 +1,7 @@
 ---
 title: Building a Simple RESTful API with Rust and Rocket
 slug: building-a-simple-restful-api-with-rust-and-rocket
-date: "2022-10-20T08:12:03.284Z"
+date: "2023-03-11T11:12:03.284Z"
 tags: rust, rocket, api, restful, web development
 description: "In this blog post, we will walk through the process of building a simple RESTful API with Rust and the Rocket web framework. We'll cover topics such as request handling, routing, database integration, and error handling, providing a solid foundation for creating a scalable and reliable API. By the end of this post, you'll have a clear understanding of how to leverage Rust and Rocket to build powerful web applications."
 
