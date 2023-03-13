@@ -63,9 +63,16 @@ with open(f"{os.getenv('OUT_PATH')}/{artcile_slug}/index.md", "w") as f:
 print(f"Article written to file {os.getenv('OUT_PATH')}/{artcile_slug}/index.md! Pushing to GitHub...")
 
 # Create a new branch and commit the new article
+print(f"git checkout -b content/{artcile_slug}")
 os.system(f"git checkout -b content/{artcile_slug}")
+
+print(f"git add {os.getenv('OUT_PATH')}/{artcile_slug}")
 os.system(f"git add {os.getenv('OUT_PATH')}/{artcile_slug}")
+
+print(f"git commit -m 'Add new blog article: {article_title}'")
 os.system(f"git commit -m 'Add new blog article: {article_title}'")
+
+print(f"git push origin content/{artcile_slug}")
 os.system(f"git push origin content/{artcile_slug}")
 
 # Create a pull request
