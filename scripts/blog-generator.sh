@@ -3,7 +3,14 @@ DIR=$(dirname "$(realpath $0)")
 echo "Running blog generator script from $DIR"
 
 # Source python virtual environment
-. $DIR/.venv/bin/activate
+VENV_PATH=$DIR/.venv
+if [ ! -d "$VENV_PATH" ]; then
+    echo "Creating python virtual environment"
+    python3 -m venv $VENV_PATH
+    $VENV_PATH/bin/pip install -r $DIR/requirements.txt
+fi
+
+. $VENV_PATH/bin/activate
 echo "Using python virtual environment: $(which python)"
 
 # Run python script

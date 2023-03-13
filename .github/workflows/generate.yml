@@ -1,0 +1,23 @@
+name: Generate Content
+
+on:
+  push:
+    branches:
+      - dev
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 */12 * * *'
+
+jobs:
+  create-article:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Article
+        run: |
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} ./scripts/blog-generator.sh
+        shell: bash
+
+      
