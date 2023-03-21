@@ -3,6 +3,8 @@ import os
 from ghapi.all import GhApi
 import openai
 
+AI_MODEL = "gpt-3.5-turbo"
+
 # Instructions for the AI
 def get_system_prompt(existing_articles: list = []):
     existing_articles_join_string = '\n    - '
@@ -13,7 +15,8 @@ title:
 slug:
 date: "2023-<current-month>-<current-day>T22:12:03.284Z"
 tags:
-description: 
+description:
+author: {AI_MODEL.upper()}
 ---
 e.g.
 ---
@@ -21,6 +24,7 @@ title: The Benefits and Drawbacks of Different Programming Languages and Which O
 date: "2023-03-09T22:12:03.284Z"
 tags: programming languages, coding, software development, tech
 description: "In this blog post, we explore the various benefits and drawbacks of popular programming languages and which ones are suitable for specific types of projects. We cover languages such as Java, Python, C++, JavaScript, and more, providing insight into their strengths and weaknesses. By the end of this post, readers will have a better understanding of which language is the best fit for their next coding project."
+author: {AI_MODEL.upper()}
 ---
 Do not write a blog article if my dev blog already covers the subject. Here is a list of the articles already available on my website:
     - {existing_articles_join_string.join(existing_articles)}
@@ -73,7 +77,7 @@ user_prompt = get_user_prompt()
 # Create a new blog article
 print("Generating new blog article...")
 completion = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
+  model=AI_MODEL,
   messages=[
     {"role": "system", "content": system_prompt},
     {"role": "user", "content": user_prompt}
