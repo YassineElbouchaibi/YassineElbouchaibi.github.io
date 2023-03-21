@@ -1,0 +1,24 @@
+name: Rework Content based on feedback
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  rework-article:
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/head
+      - name: Rework Article
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+        run: |
+          git config --local user.name 'Github Action' 
+          git config --local user.email action@github.com
+          ./scripts/blog-reworker.sh
+        shell: bash

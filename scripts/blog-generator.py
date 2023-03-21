@@ -29,7 +29,7 @@ Do not write a blog article if my dev blog already covers the subject. Here is a
 def get_user_prompt():
     return "Write a new dev blog article."
 
-# Vefify OUT_PATH and OPENAI_API_KEY are set
+# Verify ENV vars are set
 OUT_PATH = os.getenv("OUT_PATH")
 if OUT_PATH is None:
     raise Exception("OUT_PATH is not set")
@@ -84,7 +84,7 @@ print("Article generated! Writing to file...")
 # Extract the article content and slug
 article_content = completion.choices[0].message.content
 article_title = article_content.split("title:")[1].split("\n")[0].strip()
-artcile_slug = article_content.split("slug:")[1].split("\n")[0].strip()
+article_slug = article_content.split("slug:")[1].split("\n")[0].strip()
 
 # Replace date in article content
 article_content = article_content.replace(
@@ -94,24 +94,24 @@ article_content = article_content.replace(
 )
 
 # Write the article to a file
-os.makedirs(f"{OUT_PATH}/{artcile_slug}", exist_ok=True)
-with open(f"{OUT_PATH}/{artcile_slug}/index.md", "w") as f:
+os.makedirs(f"{OUT_PATH}/{article_slug}", exist_ok=True)
+with open(f"{OUT_PATH}/{article_slug}/index.md", "w") as f:
     f.write(article_content)
-print(f"Article written to file {OUT_PATH}/{artcile_slug}/index.md! Pushing to GitHub...")
+print(f"Article written to file {OUT_PATH}/{article_slug}/index.md! Pushing to GitHub...")
 
 # Create a new branch and commit the new article
-print(f"git checkout -b content/{artcile_slug}")
-os.system(f"git checkout -b content/{artcile_slug}")
+print(f"git checkout -b content/{article_slug}")
+os.system(f"git checkout -b content/{article_slug}")
 
-print(f"git add {OUT_PATH}/{artcile_slug}")
-os.system(f"git add {OUT_PATH}/{artcile_slug}")
+print(f"git add {OUT_PATH}/{article_slug}")
+os.system(f"git add {OUT_PATH}/{article_slug}")
 
 safe_article_title = article_title.replace("'", "\\'")
 print(f"git commit -m 'Add new blog article: {safe_article_title}'")
 os.system(f"git commit -m 'Add new blog article: {safe_article_title}'")
 
-print(f"git push origin content/{artcile_slug}")
-os.system(f"git push origin content/{artcile_slug}")
+print(f"git push origin content/{article_slug}")
+os.system(f"git push origin content/{article_slug}")
 
 # Create a pull request
 print("Creating pull request...")
@@ -120,7 +120,7 @@ gh_api.pulls.create(
     repo="YassineElbouchaibi.github.io",
     title=f"Add new blog article: {article_title}",
     body=f"This pull request adds a new blog article: {article_title}",
-    head=f"content/{artcile_slug}",
+    head=f"content/{article_slug}",
     base="dev"
 )
 print("Pull request created!")
