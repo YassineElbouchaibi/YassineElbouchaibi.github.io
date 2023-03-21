@@ -62,6 +62,8 @@ if not github_event["comment"]["body"].startswith("@bot"):
     print("Comment does not start with @bot, skipping...")
     exit(0)
 
+pr_number = github_event["issue"]["number"]
+
 # Initialize GitHub API
 gh_api = GhApi()
 
@@ -81,6 +83,10 @@ if len(files) > 1:
     print(f"Multiple markdown files [{', '.join(files)}] found in pull request, skipping...")
     exit(0)
 
+# Checkout to PR branch
+os.system(f"git fetch origin pull/{pr_number}/head:pr-{pr_number}")
+os.system(f"git checkout pr-{pr_number}")
+
 previous_file = files[0].filename
 
 if not os.path.exists(previous_file):
@@ -89,6 +95,10 @@ if not os.path.exists(previous_file):
 
 with open(previous_file, "r") as f:
     previous_article_content = f.read()
+
+# Checkout to original PR branch
+article_slug = previous_article_content.split("slug:")[1].split("\n")[0].strip()
+os.system(f"git checkout content/{article_slug}")
 
 # Get the feedback - The comment must be in the following format:
 # @bot
