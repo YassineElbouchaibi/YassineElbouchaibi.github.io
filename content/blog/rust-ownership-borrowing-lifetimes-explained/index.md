@@ -1,5 +1,5 @@
 ---
-title: Mastery in Rust: Understanding Ownership, Borrowing, and Lifetimes
+title: "Mastery in Rust: Understanding Ownership, Borrowing, and Lifetimes"
 slug: rust-ownership-borrowing-lifetimes-explained
 date: "2023-03-21T13:06:32.897Z"
 tags: rust, ownership, borrowing, lifetimes, programming, software development
