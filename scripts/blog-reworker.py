@@ -63,6 +63,7 @@ if not github_event["comment"]["body"].startswith("@bot") and not github_event["
     exit(0)
 
 pr_number = github_event["issue"]["number"]
+at_user = "@actions-user" if github_event["comment"]["body"].startswith("@actions-user") else "@bot"
 
 # Initialize GitHub API
 gh_api = GhApi()
@@ -102,14 +103,14 @@ os.system(f"git fetch origin content/{article_slug}")
 os.system(f"git checkout content/{article_slug}")
 
 # Get the feedback - The comment must be in the following format:
-# @bot
+# <at_user>
 # <feedback>
 # e.g.
 # @bot
 # - The title is too long
 # - The description is too short
 # - The article is too technical
-feedback = github_event["comment"]["body"].split("@bot")[1].strip()
+feedback = github_event["comment"]["body"].split(at_user)[1].strip()
 
 # Get ai prompt
 system_prompt = get_system_prompt()
