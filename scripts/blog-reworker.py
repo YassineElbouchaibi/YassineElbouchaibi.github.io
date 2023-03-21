@@ -57,9 +57,9 @@ if github_event["comment"]["author_association"] != "OWNER":
     print("Comment author is not an admin, skipping...")
     exit(0)
 
-# Comment must start with @bot
-if not github_event["comment"]["body"].startswith("@bot"):
-    print("Comment does not start with @bot, skipping...")
+# Comment must start with @bot or @actions-user
+if not github_event["comment"]["body"].startswith("@bot") and not github_event["comment"]["body"].startswith("@actions-user"):
+    print("Comment does not start with @bot or @actions-user, skipping...")
     exit(0)
 
 pr_number = github_event["issue"]["number"]
@@ -96,8 +96,9 @@ if not os.path.exists(previous_file):
 with open(previous_file, "r") as f:
     previous_article_content = f.read()
 
-# Checkout to original PR branch
+# Fetch and checkout to original PR branch
 article_slug = previous_article_content.split("slug:")[1].split("\n")[0].strip()
+os.system(f"git fetch origin content/{article_slug}")
 os.system(f"git checkout content/{article_slug}")
 
 # Get the feedback - The comment must be in the following format:
