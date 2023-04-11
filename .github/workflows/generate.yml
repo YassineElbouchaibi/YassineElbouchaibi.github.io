@@ -3,9 +3,6 @@ name: Generate Content
 on:
   workflow_dispatch:
 
-  schedule:
-    - cron: '0 */6 * * *'
-
 jobs:
   create-article:
     runs-on: ubuntu-latest
