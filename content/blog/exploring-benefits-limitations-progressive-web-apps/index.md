@@ -1,5 +1,3 @@
-I propose the following blog article:
-
 ---
 title: "Exploring the Benefits and Limitations of Progressive Web Apps"
 slug: exploring-benefits-limitations-progressive-web-apps
